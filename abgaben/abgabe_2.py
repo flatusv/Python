@@ -357,18 +357,21 @@ class Cntr:
             theString += x
         return theString
 
+    def __add__(self, rhs):
+        return Cntr(self.seq + rhs.seq)
 
 
-
-c = Cntr("Hello welt hello")
-
-print(c)
+    def most(self):
+        return max(self.seq, key=self.seq.count)
 
 
+def main():
+    c = Cntr("Hello welt hello")
+    d = Cntr("llloooX")
 
+    print(c+d)
 
-
-
+main()
 
 
 
