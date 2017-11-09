@@ -9,7 +9,9 @@
 #           I discovered a handy tool while stuyding in the library
 #           credits go the the random stranger -->: https://jsonlint.com/
 #           basically it formats json files prettily
-
+#
+# Usage:    ./wetter.py  city
+#
 
 import json, requests, sys
 
