@@ -7,7 +7,7 @@
 #
 # descr:    Get weather information - using JSON
 #           I discovered a handy tool while stuyding in the library
-#           credits go the the random stranger -->: https://jsonlint.com/
+#           credits go to the random stranger -->: https://jsonlint.com/
 #           basically it formats json files prettily
 #
 # Usage:    ./wetter.py  city
