@@ -6,7 +6,7 @@
 # descr:    Praktikum Programmieren 1 - Aufgabenblatt 2
 
 import math
-
+from sys import exit
 
 
 
@@ -237,6 +237,71 @@ class AufgabenManager:
     def info(self):
         return self.aufgaben
 
+# Aufgabe 2.6
+
+class Graph:
+
+    def __init__(self):
+        self.graph_dict = {}
+
+    def V(self):     # knoten
+        return list(self.graph_dict.keys())
+
+    def E(self):
+        return self.generate_kanten()
+
+    def addNode(self, knoten):
+        if knoten not in self.graph_dict:
+            self.graph_dict[knoten] = []
+
+    def addEdge(self, kante):
+        if len(kante) != 2:
+            print("Method 'addEdge' expects list of two elements - invalid number of elements")
+            exit(0)
+        else:
+            (knoten1, knoten2) = tuple(kante)
+            if knoten1 in self.graph_dict:
+                self.graph_dict[knoten1].append(knoten2)
+            else:
+                self.graph_dict[knoten1] = [knoten2]
+
+    def generate_kanten(self):
+        kanten = []
+        for knoten in self.graph_dict:  # keys
+            for neighbour in self.graph_dict[knoten]: # values
+                if {neighbour, knoten} not in kanten:
+                    kanten.append((knoten, neighbour))
+        return kanten
+
+
+    def allSingles(self): # all nodes being isolated
+        return [k for k in self.graph_dict if not self.graph_dict[k] ] # where k stands for nodes
+
+    def mostEdges(self):
+        allEdgesList = [t[0] for t in self.E()]
+        return max(allEdgesList, key=allEdgesList.count)
+
+    def neighbour(self, v):
+        return list(self.graph_dict[v])
+
+
+    def goFromTo(self,k,j):
+        if j not in self.V():
+            exit("Invalid! Node {} doesn't exist".format(j))
+        previousNodesList = [key for key, value in self.graph_dict.items() if j in value] # those nodes...
+        for x in previousNodesList: # ..that contain the endpoint
+            if x == k:
+                return [k,j] # end node is the neighbour of start point
+            elif x in self.graph_dict[k]: # start node has neighbour that leads to end the point
+                return [k,x,j]
+            else:
+                return self.goFromTo(k,x) + [j]
+
+
+
+
+
+
 
 
 
@@ -285,28 +350,28 @@ if __name__ == '__main__':
     #
     ########################################
     # A
-    # hans = Freund('muller','hans',53,182)
-    # elias = Freund('muller','elias',1 ,82)
-
-    # # B
-    # for i in range(25):
-    #     hans.werdeAelter
-    #     if i % 5 == 0:
-    #         print(hans.alter)
-    #         print(hans.gros)
-
-    # # C
-    # hans.isBaby()
-    # elias.isBaby()
-
-
-    # hans.neuerFreund(Freund('reimus','kamil',35,188))
-    # hans.neuerFreund(Freund('müller','johannes',42,182))
-    # hans.neuerFreund(Freund('potter','harry',72,160))
-    # hans.neuerFreund(Freund('stanis','baratheon',72,160))
-
-
-    # print(hans.aelteserFreund())
+#    hans = Freund('muller','hans',53,182)
+#    elias = Freund('muller','elias',1 ,82)
+#
+#    # B
+#    # for i in range(25):
+#    #     hans.werdeAelter
+#    #     if i % 5 == 0:
+#    #         print(hans.alter)
+#    #         print(hans.gros)
+#
+#    # C
+#    hans.isBaby()
+#    elias.isBaby()
+#
+#
+#    hans.neuerFreund(Freund('reimus','kamil',35,188))
+#    hans.neuerFreund(Freund('müller','johannes',42,182))
+#    hans.neuerFreund(Freund('potter','harry',72,160))
+#    hans.neuerFreund(Freund('stanis','baratheon',72,160))
+#
+#
+#    print(hans.aelteserFreund())
 
 
 
@@ -380,6 +445,62 @@ if __name__ == '__main__':
     # print(manageR.allePrios())
     # print(manageR.anzahlAufgaben())
 
+    ########################################
+    # Aufgabe 2.6: Start Line 240
+    #
+    ########################################
+
+    graph = Graph()
+
+    # graph.addNode(1) # add a node to the graph
+    # graph.addNode(2) # add a node to the graph
+    # graph.addNode(3) # add a node to the graph
+    # graph.addNode(4) # add a node to the graph
+    # graph.addNode(5) # add a node to the graph
+    # graph.addNode(6) # add a node to the graph
+    # graph.addNode(7) # add a node to the graph
+
+    # Do it the 'smart' way
+    for i in range(1,10):
+        graph.addNode(i)
+
+
+    # edges of node 1
+    graph.addEdge([1,2])
+    graph.addEdge([1,3])
+    graph.addEdge([1,4])
+
+    # edges of node 2
+    graph.addEdge([2,3])
+
+    # edges of node 3
+    graph.addEdge([3,4])
+    graph.addEdge([3,6])
+
+    # edges of node 4
+    graph.addEdge([4,5])
+    graph.addEdge([4,7])
+
+    # edges of node 5
+    graph.addEdge([5,1])
+
+    # edges of node 6
+    graph.addEdge([6,5])
+    graph.addEdge([6,8])
+
+    # edges of node 7
+    graph.addEdge([7,5])
+
+    # edges of node 8
+    graph.addEdge([8,9])
+
+
+
+    # print(graph.mostEdges())
+    # print(graph.neighbour(2))
+
+    print(graph.goFromTo(2,7)) # error! May god be with me
+
 
     ########################################
     # Aufgabe 2.7: Start Line 319
@@ -390,7 +511,7 @@ if __name__ == '__main__':
     # d = Cntr("llloooX")
     # print(c+d)
 
-
+    # print(c.most())
 
 
 
