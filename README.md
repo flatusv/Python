@@ -1,3 +1,3 @@
 # Python exercises
 
-Some assignments *(among others)* i worked on during programming course of the FH Albstadt/Sigmarigen.
+Some assignments i worked on during my studies and free-time projects.
