@@ -81,6 +81,14 @@ def hornerToDecimal(num):
     return reduce(lambda x,y: x+y ,
                  [list(reversed([int(d) for d in str(num)]))[i]*(3**i) for i in range(len(str(num)))])
 
+
+def textFile():
+
+    with open("bibel.txt","r") as f:
+
+        print(f.read())
+
+
 if __name__ == "__main__":
 
 
@@ -151,4 +159,21 @@ if __name__ == "__main__":
     # print(maxInList([x for x in range(100)])) # -> 99
 
     # print(hornerToDecimal(110)) # Aufgabe 3.4 c)
+
+
+
+    with open('test.txt', 'r') as f:
+        # lengthOfLines = [len(line) for line in f.readlines()] # a) liste mit den Länge jeder Zeile
+        # dreiZeilen = [next(f) for x in range(3)]              # b) die ersten drei zeilen
+        # revFirstLine = reversed(f.readline())                 # c) reversed first line
+        # lenOfFirstWords = [len(line[0])  for line in [line.split(" ") for line in f.readlines()]] # d) Länge des ersten Wortes jeder Zeile
+        # startsWithA = [line for line in f.readlines() if line.startswith('A')] # e) Lines starting with 'A'
+
+    # print(lengthOfLines)                  # a) liste mit den Länge jeder Zeile
+    # print(" ".join(dreiZeilen))           # b) die ersten drei zeilen
+    # print("".join(list(revFirstLine)))    # c) reversed first line
+    # print(lenOfFirstWords)                # d) Länge des ersten Wortes jeder Zeile
+    # print("\n".join(startsWithA))   # e) Lines starting with 'A'
+        pass
+
 
