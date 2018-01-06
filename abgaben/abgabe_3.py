@@ -5,7 +5,8 @@
 #
 # descr:    Uebungsblatt 3
 
-
+from os import listdir
+from os.path import isfile
 import matplotlib.pyplot as plt
 from random import randint as rand
 from functools import reduce
@@ -163,19 +164,24 @@ if __name__ == "__main__":
 
 
     with open('test.txt', 'r') as f:
-        # teilA = [len(line) for line in f.readlines()]         # a) liste mit den Länge jeder Zeile
-        # teilB = " ".join([next(f) for x in range(3)])                   # b) die ersten drei zeilen
-        # teilC = "".join(list(reversed(f.readline())))                        # c) reversed first line
-        # teilD = [len(line[0])  for line in [line.split(" ") for line in f.readlines()]]   # d) Länge des ersten Wortes jeder Zeile
-        # teilE = "\n".join([line for line in f.readlines() if line.startswith('A')])                  # e) Lines starting with 'A'
+        # teilA = [len(line) for line in f.readlines()]
+        # teilB = " ".join([next(f) for x in range(3)])
+        # teilC = "".join(list(reversed(f.readline())))
+        # teilD = [len(line[0])  for line in [line.split(" ") for line in f.readlines()]]
+        # teilE = "\n".join([line for line in f.readlines() if line.startswith('A')])
         # teilF = [" ".join(zeile ) for zeile in [line.split(" ") for line in f.readlines()] if len(zeile)>6 and " ".join(zeile).startswith('A')]
 
-
     # print(teilA)                  # a) liste mit den Länge jeder Zeile
-    # print(teilB)           # b) die ersten drei zeilen
-    # print(teilC)    # c) reversed first line
-    # print(teilD)                # d) Länge des ersten Wortes jeder Zeile
-    # print(teilE)   # e) Lines starting with 'A'
-    # print(teilF)
+    # print(teilB)                  # b) die ersten drei zeilen
+    # print(teilC)                  # c) reversed first line
+    # print(teilD)                  # d) Länge des ersten Wortes jeder Zeile
+    # print(teilE)                  # e) Lines starting with 'A'
+    # print(teilF)                  # f) Lines starting with 'A' and more than 6 words
+        pass
 
 
+    teilG = [(fname,line) for fname in list(filter(isfile,listdir('.')))\
+              for line in list(map(lambda x: x.strip().split(" "),open(fname).readlines()))\
+             if all(list(map(lambda x: x.isalpha() and x.lower()[0] in 'aeiou', line)))]
+
+    print(teilG)
