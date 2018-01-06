@@ -163,17 +163,19 @@ if __name__ == "__main__":
 
 
     with open('test.txt', 'r') as f:
-        # lengthOfLines = [len(line) for line in f.readlines()] # a) liste mit den Länge jeder Zeile
-        # dreiZeilen = [next(f) for x in range(3)]              # b) die ersten drei zeilen
-        # revFirstLine = reversed(f.readline())                 # c) reversed first line
-        # lenOfFirstWords = [len(line[0])  for line in [line.split(" ") for line in f.readlines()]] # d) Länge des ersten Wortes jeder Zeile
-        # startsWithA = [line for line in f.readlines() if line.startswith('A')] # e) Lines starting with 'A'
+        # teilA = [len(line) for line in f.readlines()]         # a) liste mit den Länge jeder Zeile
+        # teilB = " ".join([next(f) for x in range(3)])                   # b) die ersten drei zeilen
+        # teilC = "".join(list(reversed(f.readline())))                        # c) reversed first line
+        # teilD = [len(line[0])  for line in [line.split(" ") for line in f.readlines()]]   # d) Länge des ersten Wortes jeder Zeile
+        # teilE = "\n".join([line for line in f.readlines() if line.startswith('A')])                  # e) Lines starting with 'A'
+        # teilF = [" ".join(zeile ) for zeile in [line.split(" ") for line in f.readlines()] if len(zeile)>6 and " ".join(zeile).startswith('A')]
 
-    # print(lengthOfLines)                  # a) liste mit den Länge jeder Zeile
-    # print(" ".join(dreiZeilen))           # b) die ersten drei zeilen
-    # print("".join(list(revFirstLine)))    # c) reversed first line
-    # print(lenOfFirstWords)                # d) Länge des ersten Wortes jeder Zeile
-    # print("\n".join(startsWithA))   # e) Lines starting with 'A'
-        pass
+
+    # print(teilA)                  # a) liste mit den Länge jeder Zeile
+    # print(teilB)           # b) die ersten drei zeilen
+    # print(teilC)    # c) reversed first line
+    # print(teilD)                # d) Länge des ersten Wortes jeder Zeile
+    # print(teilE)   # e) Lines starting with 'A'
+    # print(teilF)
 
 
