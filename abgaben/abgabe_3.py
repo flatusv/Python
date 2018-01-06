@@ -5,11 +5,14 @@
 #
 # descr:    Uebungsblatt 3
 
+
+import matplotlib.pyplot as plt
 from os import listdir
 from os.path import isfile
-import matplotlib.pyplot as plt
 from random import randint as rand
 from functools import reduce
+
+
 
 def isReflexive(menge,relation):
     if all((x,x) in relation for x in menge):
@@ -66,10 +69,6 @@ def plotBar():
 
 
 
-
-
-
-# Aufgabe 3.4: flatten a list with tuples using reduce from functools
 def flachKlopfer(output):
     return reduce(lambda x,y:x+y, map(list, output))
 
@@ -170,18 +169,25 @@ if __name__ == "__main__":
         # teilD = [len(line[0])  for line in [line.split(" ") for line in f.readlines()]]
         # teilE = "\n".join([line for line in f.readlines() if line.startswith('A')])
         # teilF = [" ".join(zeile ) for zeile in [line.split(" ") for line in f.readlines()] if len(zeile)>6 and " ".join(zeile).startswith('A')]
+        # teilH = [line for line in enumerate(list(map(lambda x: x.strip('\n'), f.readlines())), start=1) if len(line[1].split(" "))-1==0]
 
-    # print(teilA)                  # a) liste mit den Länge jeder Zeile
-    # print(teilB)                  # b) die ersten drei zeilen
-    # print(teilC)                  # c) reversed first line
-    # print(teilD)                  # d) Länge des ersten Wortes jeder Zeile
-    # print(teilE)                  # e) Lines starting with 'A'
-    # print(teilF)                  # f) Lines starting with 'A' and more than 6 words
+        # teilI = max([tuple(list(line)+[reduce(lambda x,y: x+y,map(line[1].lower().count, 'aeiou'))])\
+                     # for line in enumerate(list(map(lambda x: x.strip('\n'), f.readlines())), start=1)], key=lambda x: x[2])
+
         pass
 
 
-    teilG = [(fname,line) for fname in list(filter(isfile,listdir('.')))\
-              for line in list(map(lambda x: x.strip().split(" "),open(fname).readlines()))\
-             if all(list(map(lambda x: x.isalpha() and x.lower()[0] in 'aeiou', line)))]
+    # print(teilA)                  # Aufgabe 3.5 a) liste mit den Länge jeder Zeile
+    # print(teilB)                  # Aufgabe 3.5 b) die ersten drei zeilen
+    # print(teilC)                  # Aufgabe 3.5 c) reversed first line
+    # print(teilD)                  # Aufgabe 3.5 d) Länge des ersten Wortes jeder Zeile
+    # print(teilE)                  # Aufgabe 3.5 e) Lines starting with 'A'
+    # print(teilF)                  # Aufgabe 3.5 f) Lines starting with 'A' and more than 6 words
+    # print(teilI)
 
-    print(teilG)
+
+    # teilG = [(fname," ".join(line)) for fname in list(filter(isfile,listdir('.')))\
+    #           for line in list(map(lambda x: x.strip().split(" "),open(fname).readlines()))\
+    #          if all(list(map(lambda x: x.isalpha() and x.lower()[0] in 'aeiou', line)))]
+
+    # print(teilG) # Aufgabe 3.5 g)
