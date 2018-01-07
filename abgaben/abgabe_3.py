@@ -171,22 +171,34 @@ if __name__ == "__main__":
         # teilJ = max([(line[0],wort,reduce(lambda x,y: x+y, map(wort.lower().count, 'aeiou')))\
         #                       for line in enumerate(list(map(lambda x: x.strip('\n'), f.readlines())), start=1) for wort in line[1].split()],\
         #             key=lambda x: x[2])
-        pass
+        # teilK = [(line[0],line[1][0:2]) for line in enumerate(map(lambda x: x.strip('\n'),f.readlines()), start=1)]
 
+        # teilL = len([wort for line in map(lambda x: x.strip('\n'),f.readlines()) for wort in line.split() if len(wort)>10])
+        pass
 
     # print(teilA)                  # Aufgabe 3.5 a) liste mit den Länge jeder Zeile
     # print(teilB)                  # Aufgabe 3.5 b) die ersten drei zeilen
     # print(teilC)                  # Aufgabe 3.5 c) reversed first line
-    # print(teilD)                  # Aufgabe 3.5 d) Länge des ersten Wortes jeder Zeile
-    # print(teilE)                  # Aufgabe 3.5 e) Lines starting with 'A'
-    # print(teilF)                  # Aufgabe 3.5 f) Lines starting with 'A' and more than 6 words
-    # print(teilH)
-    # print(teilI)
-    # print(teilJ)
-
+    # print(teilD)                  # Aufgabe 3.5 d) länge des ersten Wortes jeder Zeile
+    # print(teilE)                  # Aufgabe 3.5 e) lines starting with 'A'
+    # print(teilF)                  # Aufgabe 3.5 f) lines starting with 'A' and more than 6 words
+    # print(teilH)                  # Aufgabe 3.5 h) lines without white spaces
+    # print(teilI)                  # Aufgabe 3.5 i) line with the most vowels
+    # print(teilJ)                  # Aufgabe 3.5 j) line with the most vowels in a word
+    # print(teilK)                  # Aufgabe 3.5 k) only the first two letters of every line
+    # print(teilL)                  # Aufgabe 3.5 l) how many words with more than 10letters in file
 
     # teilG = [(fname," ".join(line)) for fname in list(filter(isfile,listdir('.')))\
     #           for line in list(map(lambda x: x.strip().split(" "),open(fname).readlines()))\
     #          if all(list(map(lambda x: x.isalpha() and x.lower()[0] in 'aeiou', line)))]
 
     # print(teilG) # Aufgabe 3.5 g)
+
+    # teilM = [fname for fname in filter(isfile,listdir('.')) if fname.endswith('.py')]
+    # print(teilM)
+
+    # teilN = [fname for fname in filter(isfile,listdir('.')) if len(fname)>10 and len(open(fname).readlines())>10 ]
+    # print(teilN)
+
+
+
