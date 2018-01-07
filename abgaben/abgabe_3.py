@@ -82,12 +82,6 @@ def hornerToDecimal(num):
                  [list(reversed([int(d) for d in str(num)]))[i]*(3**i) for i in range(len(str(num)))])
 
 
-def textFile():
-
-    with open("bibel.txt","r") as f:
-
-        print(f.read())
-
 
 if __name__ == "__main__":
 
@@ -174,6 +168,9 @@ if __name__ == "__main__":
         # teilI = max([tuple(list(line)+[reduce(lambda x,y: x+y,map(line[1].lower().count, 'aeiou'))])\
                      # for line in enumerate(list(map(lambda x: x.strip('\n'), f.readlines())), start=1)], key=lambda x: x[2])
 
+        # teilJ = max([(line[0],wort,reduce(lambda x,y: x+y, map(wort.lower().count, 'aeiou')))\
+        #                       for line in enumerate(list(map(lambda x: x.strip('\n'), f.readlines())), start=1) for wort in line[1].split()],\
+        #             key=lambda x: x[2])
         pass
 
 
@@ -183,7 +180,9 @@ if __name__ == "__main__":
     # print(teilD)                  # Aufgabe 3.5 d) Länge des ersten Wortes jeder Zeile
     # print(teilE)                  # Aufgabe 3.5 e) Lines starting with 'A'
     # print(teilF)                  # Aufgabe 3.5 f) Lines starting with 'A' and more than 6 words
+    # print(teilH)
     # print(teilI)
+    # print(teilJ)
 
 
     # teilG = [(fname," ".join(line)) for fname in list(filter(isfile,listdir('.')))\
