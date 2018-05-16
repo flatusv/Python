@@ -19,7 +19,7 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 
 # Global variables
-logFilePath = '/home/geeray/.config/weareone/history.log'
+logFilePath = 'some/path' + 'history.log'
 radio = ["technobase", "housetime", "hardbase", "trancebase", "coretime",
          "clubtime","teatime"]
 
@@ -34,6 +34,7 @@ class Tracklist():
 
     def __init__(self, url):
         self.url = url
+        self.tempList = []
         self.tracks = []
 
 
@@ -45,13 +46,13 @@ class Tracklist():
         html_content = r.text
         soup = BeautifulSoup(html_content, 'html5lib')
         links = soup.findAll('a', href=re.compile('^/release/'))
-        self.tracks = list(set(list(filter(None,[ x.text for x in links ]))))
+        self.tempList = list(set(list(filter(None,[ x.text for x in links ]))))
 
         # not get rid of duplicates
         with open(logFilePath) as f:
             content = f.readlines()
         alreadyDownloaded = [track.replace('\n','') for track in content]
-        self.tracks = list(set(self.tracks)^set(alreadyDownloaded))
+        self.tracks = list(set(self.tempList)^set(alreadyDownloaded))
 
         return self.tracks
 
@@ -62,7 +63,7 @@ class Tracklist():
 
         for track in self.tracks: # gvsearch uses google video, change it to "ytsearch" to use youtube
             with open(logFilePath, 'a') as f:
-                os.system('youtube-dl --extract-audio --audio-format mp3 "gvsearch1:{}"'.format(track))
+                os.system('youtube-dl --extract-audio --audio-format mp3 -o "{}.%(ext)s" "gvsearch1:{}"'.format(track,track))
                 f.write(track + "\n")   # write the track title to log file
 
 
