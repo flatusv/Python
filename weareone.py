@@ -5,7 +5,6 @@
 #
 # descr:    Retrieve and download the most recent tracks from "weareone.fm"
 
-#  TODO:  <15-05-18, make program aware of tracks that have already been downloaded> #
 
 
 
@@ -15,7 +14,20 @@ import requests
 import re
 import urllib.request
 import urllib.parse
+import sys
 from bs4 import BeautifulSoup
+from pathlib import Path
+
+# Global variables
+logFilePath = '/home/geeray/.config/weareone/history.log'
+radio = ["technobase", "housetime", "hardbase", "trancebase", "coretime",
+         "clubtime","teatime"]
+
+def createHistoryLog():
+    os.system("touch {}".format(logFilePath))
+    print("Created log file: {}".format(logFilePath))
+
+
 
 
 class Tracklist():
@@ -35,13 +47,30 @@ class Tracklist():
         links = soup.findAll('a', href=re.compile('^/release/'))
         self.tracks = list(set(list(filter(None,[ x.text for x in links ]))))
 
+        # not get rid of duplicates
+        with open(logFilePath) as f:
+            content = f.readlines()
+        alreadyDownloaded = [track.replace('\n','') for track in content]
+        self.tracks = list(set(self.tracks)^set(alreadyDownloaded))
+
+        return self.tracks
+
     def ytDownTracks(self):
 
+        if not os.path.isfile(logFilePath):
+            createHistoryLog()
+
         for track in self.tracks: # gvsearch uses google video, change it to "ytsearch" to use youtube
-            os.system('youtube-dl --extract-audio --audio-format mp3 "gvsearch1:{}"'.format(track))
+            with open(logFilePath, 'a') as f:
+                os.system('youtube-dl --extract-audio --audio-format mp3 "gvsearch1:{}"'.format(track))
+                f.write(track + "\n")   # write the track title to log file
 
 
 if __name__== "__main__":
-    tracklist = Tracklist("https://www.trancebase.fm/tracklist/")
-    tracklist.getListOfTracks()
-    tracklist.ytDownTracks()
+
+    if (len(sys.argv) != 1 and sys.argv[1] not in radio):
+        print("Usage: {} {}".format(sys.argv[0],radio))
+    else:
+        tracklist = Tracklist("https://www.{}.fm/tracklist/".format(sys.argv[1]))
+        tracklist.getListOfTracks()
+        tracklist.ytDownTracks()
