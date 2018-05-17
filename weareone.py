@@ -19,7 +19,7 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 
 # Global variables
-logFilePath = '/home/geeray/.config/weareone/'
+logFilePath = 'path/where/of/log_file'
 logFile = logFilePath + sys.argv[1] + "_history.log"
 radio = ["technobase", "housetime", "hardbase", "trancebase", "coretime",
          "clubtime","teatime"]
